@@ -11,10 +11,11 @@ use stm32f30x;
 
 #[entry]
 fn main() -> ! {
-  // Set up SysTick interrupt.
+  // Set up SysTick peripheral.
   let cm_p = cortex_m::Peripherals::take().unwrap();
   let mut syst = cm_p.SYST;
   syst.set_clock_source( SystClkSource::Core );
+  // ~1ms period; STM32F3 boots to an 8MHz internal oscillator.
   syst.set_reload( 8_000_000 );
   syst.enable_counter();
 
